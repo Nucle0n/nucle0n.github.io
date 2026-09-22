@@ -13,6 +13,19 @@
     /* border: 1px solid black; */
 }
 
+.box {
+    background-color: var(--bg-box);
+    color: var(--txt-box);
+
+    /* text-align: center; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* border-bottom: 5px solid white;
+    border-top: 0; */
+    /* border-radius: 15px; */
+
+    padding: 10px;
+}
+
 .header {
     display: flex;
     flex-direction: column;
@@ -28,40 +41,28 @@
 
     border: 2px solid black;
     border-top-left-radius: 20px;
-    clip-path: polygon(0 0,
-            /* A */
-            calc(100% - 250px) 0,
-            /* B */
-            calc(100% - 235px) 15px,
-            /* C */
-            calc(100% - 6px) 15px,
-            /* D */
-            100% 21px,
-            /* E */
-            100% calc(100% - 6px),
-            /* F */
-            calc(100% - 6px) 100%,
-            /* G */
-            6px 100%,
-            /* H */
-            0 calc(100% - 6px)
-            /* I */
+    clip-path: polygon(0 0,         /* A */
+            calc(100% - 150px) 0,   /* B */
+            calc(100% - 135px) 16px,/* C */
+            calc(100% - 16px) 16px, /* D */
+            100% 32px,              /* E */
+            100% calc(100% - 16px), /* F */
+            calc(100% - 16px) 100%, /* G */
+            16px 100%,              /* H */
+            0 calc(100% - 16px)     /* I */
         );
+    
+    .pp {
+        width: 80px;
+        height: auto;
+        border-radius: 50%;
+    }
 
-    /* margin: 10px; */
-    /* gap: 15px; */
-}
+    .r-job {
+        font-size: 0.85rem;
 
-.pp {
-    width: 80px;
-    height: auto;
-    border-radius: 50%;
-}
-
-.job {
-    font-size: 0.85rem;
-
-    margin: 0px;
+        margin: 0px;
+    }
 }
 
 body {
@@ -79,19 +80,6 @@ body {
     /* gap: 5px; */
 }
 
-.box {
-    background-color: var(--bg-box);
-    color: var(--txt-box);
-
-    /* text-align: center; */
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* border-bottom: 5px solid white;
-    border-top: 0; */
-    /* border-radius: 15px; */
-
-    padding: 10px;
-}
-
 .nav {
     background-color: var(--bg-global);
     color: var(--bg-box);
@@ -107,147 +95,147 @@ body {
             0 6px);
 
     padding: 0;
-}
 
-.nav__ul {
-    display: flex;
-    justify-content: center;
+    .nav__ul {
+        display: flex;
+        justify-content: center;
 
-    list-style: none;
+        list-style: none;
 
-    margin: 40px auto 8px;
-    padding: 0;
-    /* gap: calc(6px + 2vw); */
-    gap: 8px;
+        margin: 40px auto 8px;
+        padding: 0;
+        /* gap: calc(6px + 2vw); */
+        gap: 8px;
 
-    li {
-        position: relative;
+        li {
+            position: relative;
+        }
+
+        li::after {
+            /*-------------------*/
+            /* Barres lumineuses */
+            /*-------------------*/
+            content: "";
+            position: absolute;
+
+            left: 50%;
+
+            width: 0;
+            height: 2px;
+
+            transform: translateX(-50%);
+            bottom: -8px;
+
+            background: var(--theme-color);
+
+            box-shadow:
+                0 0 5px var(--theme-color),
+                0 0 12px var(--theme-color),
+                0 0 20px var(--theme-color);
+
+            transition: width var(--nav-trans-time) ease;
+        }
+
+        li:hover::after {
+            width: 100%;
+        }
+
+        .menu {
+            color: currentColor;
+
+            text-decoration: none;
+            position: relative;
+
+            font-size: 0.75rem;
+
+            margin: 0;
+            padding-top: 36px;
+
+            transition:
+                color var(--nav-trans-time) ease,
+                text-shadow var(--nav-trans-time) ease;
+        }
     }
 
-    li::after {
-        /*-------------------*/
-        /* Barres lumineuses */
-        /*-------------------*/
+    /* --------------------------------- */
+    /* Élément virtuel réservé à l'icône */
+    /* --------------------------------- */
+    .menu::before {
+        background-color: currentColor;
+
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+
+        width: 32px;
+        height: 32px;
+
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+
+        transform: translateX(-50%);
+    }
+
+    /*----------------------------------*/
+    /* Halo lumineux derrière le bouton */
+    /*----------------------------------*/
+    .menu::after {
         content: "";
         position: absolute;
 
         left: 50%;
-
-        width: 0;
-        height: 2px;
-
-        transform: translateX(-50%);
         bottom: -8px;
 
-        background: var(--theme-color);
+        width: 120%;
+        height: 55px;
 
-        box-shadow:
-            0 0 5px var(--theme-color),
-            0 0 12px var(--theme-color),
-            0 0 20px var(--theme-color);
+        transform: translateX(-50%);
 
-        transition: width var(--nav-trans-time) ease;
+        background: radial-gradient(ellipse at bottom,
+                rgb(0 248 165 / 0.35) 0%,
+                rgb(0 248 165 / 0.15) 35%,
+                transparent 70%);
+
+        opacity: 0;
+        pointer-events: none;
+
+        transition: opacity 0.25s ease;
     }
 
-    li:hover::after {
-        width: 100%;
+    .menu:hover {
+        color: var(--theme-color);
+        text-shadow: 0 0 8px rgb(0, 248, 165 / 0.6);
     }
-}
 
-.nav__ul .menu {
-    color: currentColor;
+    .menu:hover::after {
+        opacity: 1;
+    }
 
-    text-decoration: none;
-    position: relative;
+    /* ---------------------- */
+    /* Éléments de navigation */
+    /* ---------------------- */
 
-    font-size: 0.75rem;
+    .home::before {
+        mask-image: url("../img/svg/nav/home.svg");
+    }
 
-    margin: 0;
-    padding-top: 36px;
+    .exp::before {
+        mask-image: url("../img/svg/nav/exp.svg");
+    }
 
-    transition:
-        color var(--nav-trans-time) ease,
-        text-shadow var(--nav-trans-time) ease;
-}
+    .formations::before {
+        mask-image: url(../img/svg/nav/form.svg);
+    }
 
-/* --------------------------------- */
-/* Élément virtuel réservé à l'icône */
-/* --------------------------------- */
-.menu::before {
-    background-color: currentColor;
+    .comp::before {
+        mask-image: url(../img/svg/nav/comp.svg);
+    }
 
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-
-    width: 32px;
-    height: 32px;
-
-    mask-repeat: no-repeat;
-    mask-position: center;
-    mask-size: contain;
-
-    transform: translateX(-50%);
-}
-
-/*----------------------------------*/
-/* Halo lumineux derrière le bouton */
-/*----------------------------------*/
-.menu::after {
-    content: "";
-    position: absolute;
-
-    left: 50%;
-    bottom: -8px;
-
-    width: 120%;
-    height: 55px;
-
-    transform: translateX(-50%);
-
-    background: radial-gradient(ellipse at bottom,
-            rgb(0 248 165 / 0.35) 0%,
-            rgb(0 248 165 / 0.15) 35%,
-            transparent 70%);
-
-    opacity: 0;
-    pointer-events: none;
-
-    transition: opacity 0.25s ease;
-}
-
-.menu:hover {
-    color: var(--theme-color);
-    text-shadow: 0 0 8px rgb(0, 248, 165 / 0.6);
-}
-
-.menu:hover::after {
-    opacity: 1;
-}
-
-/* ---------------------- */
-/* Éléments de navigation */
-/* ---------------------- */
-
-.home::before {
-    mask-image: url("../img/svg/nav/home.svg");
-}
-
-.exp::before {
-    mask-image: url("../img/svg/nav/exp.svg");
-}
-
-.formations::before {
-    mask-image: url(../img/svg/nav/form.svg);
-}
-
-.comp::before {
-    mask-image: url(../img/svg/nav/comp.svg);
-}
-
-.plus::before {
-    mask-image: url(../img/svg/nav/div.svg);
+    .plus::before {
+        mask-image: url(../img/svg/nav/div.svg);
+    }
 }
 
 .profil,
@@ -264,7 +252,7 @@ body {
     transform: translateY(-100%);
 }
 
-.profil h2 {
+.cat-title{
     font-size: 1rem;
 }
 
@@ -272,15 +260,47 @@ body {
     flex: 1;
     transition: margin-top 1s ease;
     min-height: 100%;
+
+    p {
+        text-align: justify;
+    }
+
+    .article {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        .job {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .plus {
+            font-size: 0.7rem;
+            font-style: italic;
+        }
+    }
 }
 
-.main h3 {
-    font-size: 1rem;
+body::after {
+    /* position: relative; */
+    top: 35vh;
+    left: 0;
+    content: "WIP";
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    font-size: 250px;
+    text-align: center;
+    display: block;
+    height: 36%;
+    width: 100%;
+    rotate: -45deg;
+    background: rgb(255, 217, 0);
+    position: absolute;
+    z-index: 10;
+    opacity: 0.1;
+    pointer-events: none;
 }
 
-.main p {
-    text-align: justify;
-}
+
 
 
 /* @media (max-width: 500px) {
