@@ -6,6 +6,7 @@
     --txt-box: #4d4d4d;
     --theme-color: #00f8a5;
     --nav-trans-time: 0.15s;
+    --angles: 10px;
 }
 
 * {
@@ -41,17 +42,32 @@
 
     border: 2px solid black;
     border-top-left-radius: 20px;
-    clip-path: polygon(0 0,         /* A */
-            calc(100% - 150px) 0,   /* B */
-            calc(100% - 135px) 16px,/* C */
-            calc(100% - 16px) 16px, /* D */
-            100% 32px,              /* E */
-            100% calc(100% - 16px), /* F */
-            calc(100% - 16px) 100%, /* G */
-            16px 100%,              /* H */
-            0 calc(100% - 16px)     /* I */
+    clip-path: polygon(
+            0 0,                                                /* A */
+            calc(100% - 150px) 0,                               /* B */
+            calc(100% - (145px - var(--angles))) calc(var(--angles) + 5px), /* C */
+            calc(100% - var(--angles)) calc(var(--angles) + 5px),           /* D */
+            100% calc(2 * var(--angles) + 5px),                       /* E */
+            100% calc(100% - var(--angles)),                    /* F */
+            calc(100% - var(--angles)) 100%,                    /* G */
+            var(--angles) 100%,                                 /* H */
+            0 calc(100% - var(--angles))                        /* I */
         );
     
+    .contact {
+        display: flex;
+        margin-top: 1rem;
+        padding-left: 30px;
+
+        width: 100vw
+        /* gap: 10px; */
+        
+    }
+
+    /* button {
+        display: inline-block;
+    } */
+
     .pp {
         width: 80px;
         height: auto;
@@ -217,45 +233,60 @@ body {
     /* Éléments de navigation */
     /* ---------------------- */
 
-    .home::before {
+    .home-btn::before {
         mask-image: url("../img/svg/nav/home.svg");
     }
 
-    .exp::before {
+    .exp-btn::before {
         mask-image: url("../img/svg/nav/exp.svg");
     }
 
-    .formations::before {
+    .formations-btn::before {
         mask-image: url(../img/svg/nav/form.svg);
     }
 
-    .comp::before {
+    .comp-btn::before {
         mask-image: url(../img/svg/nav/comp.svg);
     }
 
-    .plus::before {
+    .plus-btn::before {
         mask-image: url(../img/svg/nav/div.svg);
     }
 }
 
 .profil,
+.home,
+.formations,
+.exp {
+        clip-path: polygon(
+            0% var(--angles),                /*A*/
+            var(--angles) 0%,                /*B*/
+            calc(100% - var(--angles)) 0%,   /*C*/
+            100% var(--angles),              /*D*/
+            100% calc(100% - var(--angles)), /*E*/
+            calc(100% - var(--angles)) 100%, /*F*/
+            var(--angles) 100%,              /*G*/
+            0 calc(100% - var(--angles))     /*H*/
+            );
+}
+
+.profil {
+    background-color: var(--bg-box);
+}
+
+.main { 
+        background-color: var(--bg-global);
+}
+
+.profil,
 .main {
+
     position: relative;
     z-index: 1;
 
     height: 100%;
 
     transition: transform 1s ease;
-    clip-path: polygon(
-            0% 16px,                /*A*/
-            16px 0%,                /*B*/
-            calc(100% - 16px) 0%,   /*C*/
-            100% 16px,              /*D*/
-            100% calc(100% - 16px), /*E*/
-            calc(100% - 16px) 100%, /*F*/
-            16px 100%,              /*G*/
-            0 calc(100% - 16px)     /*H*/
-            );
 }
 
 .profil.collapsed {
@@ -271,13 +302,15 @@ body {
     transition: margin-top 1s ease;
     min-height: 100%;
 
-    p {
+    /* p {
         text-align: justify;
-    }
+    } */
 
     .article {
         display: grid;
         grid-template-columns: 1fr 3fr;
+        padding-bottom: 1rem;;
+
         .job {
             font-size: 1rem;
             margin: 0;
@@ -287,8 +320,17 @@ body {
             font-size: 0.7rem;
             font-style: italic;
         }
+        
+        p {
+            margin: 0;
+        }
     }
 }
+
+
+/*-----*/
+/* WIP */
+/*-----*/
 
 body::after {
     /* position: relative; */
