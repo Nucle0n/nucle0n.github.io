@@ -27,6 +27,16 @@
     padding: 10px;
 }
 
+.header::after {
+    content: "";
+    background-color: var(--bg-global);
+    top: 0;
+    left: 0;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+}
+
 .header {
     display: flex;
     flex-direction: column;
@@ -43,30 +53,31 @@
     border: 2px solid black;
     border-top-left-radius: 20px;
     clip-path: polygon(
-            0 0,                                                /* A */
-            calc(100% - 150px) 0,                               /* B */
+            0 0,                                                            /* A */
+            calc(100% - 150px) 0,                                           /* B */
             calc(100% - (145px - var(--angles))) calc(var(--angles) + 5px), /* C */
             calc(100% - var(--angles)) calc(var(--angles) + 5px),           /* D */
-            100% calc(2 * var(--angles) + 5px),                       /* E */
-            100% calc(100% - var(--angles)),                    /* F */
-            calc(100% - var(--angles)) 100%,                    /* G */
-            var(--angles) 100%,                                 /* H */
-            0 calc(100% - var(--angles))                        /* I */
+            100% calc(2 * var(--angles) + 5px),                             /* E */
+            100% calc(100% - var(--angles)),                                /* F */
+            calc(100% - var(--angles)) 100%,                                /* G */
+            var(--angles) 100%,                                             /* H */
+            0 calc(100% - var(--angles))                                    /* I */
         );
     
-    .contact {
+    /* .contact {
         display: flex;
         margin-top: 1rem;
         padding-left: 30px;
 
-        width: 100vw
-        /* gap: 10px; */
+        width: 100vw;
+        gap: 10px;
         
-    }
+    } */
 
     /* button {
         display: inline-block;
     } */
+
 
     .pp {
         width: 80px;
@@ -74,10 +85,26 @@
         border-radius: 50%;
     }
 
+    .name {
+        padding-left: 15px;
+    }
     .r-job {
         font-size: 0.85rem;
-
         margin: 0px;
+    }
+
+    .contact__list {
+        display: flex;
+        gap: 8px;
+
+        margin: 0;
+        padding: 0;
+        
+        list-style: none;
+        .btn {
+            display: block;
+            text-decoration: none;
+        }
     }
 }
 
